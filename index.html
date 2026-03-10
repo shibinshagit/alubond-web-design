@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alubond U.S.A — Fire Retardant Metal Composites</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== LOADER ===== -->
+  <div id="loader">
+    <img src="brand%20assets/Alubond_Logo.png" alt="Alubond" class="loader-logo">
+    <div id="loader-bar"><div id="loader-fill"></div></div>
+    <div id="loader-percent">0%</div>
+  </div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" id="site-header">
+    <nav class="site-nav">
+      <a href="#" class="nav-logo">
+        <img src="brand%20assets/Alubond_Logo.png" alt="Alubond U.S.A" class="logo-img">
+      </a>
+      <div class="nav-links">
+        <a href="#dissection-wrap" class="nav-link">Technology</a>
+        <a href="#fire-rating" class="nav-link">Safety</a>
+        <a href="#finishes" class="nav-link">Finishes</a>
+        <a href="#applications" class="nav-link">Applications</a>
+        <a href="#footer" class="nav-link cta-nav">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===== CANVAS (fixed, full viewport) ===== -->
+  <div class="canvas-wrap" id="canvas-wrap">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+
+    <!-- Full-bleed slider background -->
+    <div class="hero-slider" id="hero-slider">
+      <div class="hs-track" id="hs-track">
+
+        <div class="hs-slide">
+          <div class="hs-slide-img" style="--slide-bg: url('hero%20slider/Burj-Khalifa.jpg')">
+            <img src="hero%20slider/Burj-Khalifa.jpg" alt="Burj Khalifa">
+          </div>
+          <div class="hs-caption">
+            <span class="hs-cap-title">Burj Khalifa</span>
+            <span class="hs-cap-loc">Dubai, United Arab Emirates</span>
+          </div>
+        </div>
+
+        <div class="hs-slide">
+          <div class="hs-slide-img" style="--slide-bg: url('hero%20slider/the-address-hotel-13.jpg.webp')">
+            <img src="hero%20slider/the-address-hotel-13.jpg.webp" alt="The Address Downtown Hotel">
+          </div>
+          <div class="hs-caption">
+            <span class="hs-cap-title">The Address Downtown</span>
+            <span class="hs-cap-loc">Dubai, United Arab Emirates</span>
+          </div>
+        </div>
+
+        <div class="hs-slide">
+          <div class="hs-slide-img" style="--slide-bg: url('hero%20slider/Tornado-Tower-scaled.webp')">
+            <img src="hero%20slider/Tornado-Tower-scaled.webp" alt="Tornado Tower">
+          </div>
+          <div class="hs-caption">
+            <span class="hs-cap-title">Tornado Tower</span>
+            <span class="hs-cap-loc">Doha, Qatar</span>
+          </div>
+        </div>
+
+        <div class="hs-slide">
+          <div class="hs-slide-img" style="--slide-bg: url('hero%20slider/Khalifa%20stadium.jpg')">
+            <img src="hero%20slider/Khalifa%20stadium.jpg" alt="Khalifa International Stadium">
+          </div>
+          <div class="hs-caption">
+            <span class="hs-cap-title">Khalifa International Stadium</span>
+            <span class="hs-cap-loc">Doha, Qatar</span>
+          </div>
+        </div>
+
+        <div class="hs-slide">
+          <div class="hs-slide-img" style="--slide-bg: url('hero%20slider/Yas%20Marina.jpg')">
+            <img src="hero%20slider/Yas%20Marina.jpg" alt="Yas Marina">
+          </div>
+          <div class="hs-caption">
+            <span class="hs-cap-title">Yas Marina</span>
+            <span class="hs-cap-loc">Abu Dhabi, United Arab Emirates</span>
+          </div>
+        </div>
+
+        <div class="hs-slide">
+          <div class="hs-slide-img" style="--slide-bg: url('hero%20slider/Abu%20Dhabi%20Airport.jpg')">
+            <img src="hero%20slider/Abu%20Dhabi%20Airport.jpg" alt="Abu Dhabi International Airport">
+          </div>
+          <div class="hs-caption">
+            <span class="hs-cap-title">Abu Dhabi International Airport</span>
+            <span class="hs-cap-loc">Abu Dhabi, United Arab Emirates</span>
+          </div>
+        </div>
+
+        <div class="hs-slide">
+          <div class="hs-slide-img" style="--slide-bg: url('hero%20slider/RedSeaAirport_Credit_Foster%2BPartners_005.webp')">
+            <img src="hero%20slider/RedSeaAirport_Credit_Foster%2BPartners_005.webp" alt="Red Sea International Airport">
+          </div>
+          <div class="hs-caption">
+            <span class="hs-cap-title">Red Sea International Airport</span>
+            <span class="hs-cap-loc">NEOM, Saudi Arabia</span>
+          </div>
+        </div>
+
+        <div class="hs-slide">
+          <div class="hs-slide-img" style="--slide-bg: url('hero%20slider/St.%20Petersburg%20Stadium%2C%20Russia.jpg')">
+            <img src="hero%20slider/St.%20Petersburg%20Stadium%2C%20Russia.jpg" alt="St. Petersburg Stadium">
+          </div>
+          <div class="hs-caption">
+            <span class="hs-cap-title">Krestovsky Stadium</span>
+            <span class="hs-cap-loc">St. Petersburg, Russia</span>
+          </div>
+        </div>
+
+        <div class="hs-slide">
+          <div class="hs-slide-img" style="--slide-bg: url('hero%20slider/Croatia.jpg')">
+            <img src="hero%20slider/Croatia.jpg" alt="Croatia Project">
+          </div>
+          <div class="hs-caption">
+            <span class="hs-cap-title">Landmark Development</span>
+            <span class="hs-cap-loc">Croatia</span>
+          </div>
+        </div>
+
+        <div class="hs-slide">
+          <div class="hs-slide-img" style="--slide-bg: url('hero%20slider/NAC%20Municipal%20building_Belgium.jpg')">
+            <img src="hero%20slider/NAC%20Municipal%20building_Belgium.jpg" alt="NAC Municipal Building">
+          </div>
+          <div class="hs-caption">
+            <span class="hs-cap-title">NAC Municipal Building</span>
+            <span class="hs-cap-loc">Belgium</span>
+          </div>
+        </div>
+
+      </div><!-- /hs-track -->
+
+      <!-- Progress bar -->
+      <div class="hs-progress-track">
+        <div class="hs-progress-fill" id="hs-prog"></div>
+      </div>
+
+    </div><!-- /hero-slider -->
+
+    <!-- Dark gradient overlay for text readability -->
+    <div class="hero-overlay"></div>
+
+    <!-- Text overlay — bottom-left -->
+    <div class="hero-content">
+      <span class="hero-eyebrow">Alubond U.S.A &mdash; Est. 1989</span>
+      <h1 class="hero-heading">
+        <span class="word"><span class="word-inner">Tested for</span></span>
+        <span class="word"><span class="word-inner">Safety.</span></span>
+        <span class="word accent"><span class="word-inner">Crafted for</span></span>
+        <span class="word accent"><span class="word-inner">Legacy.</span></span>
+      </h1>
+      <p class="hero-sub">
+        High-performance composite panels engineered for safety,<br>designed for the extraordinary.
+      </p>
+      <a href="#dissection-wrap" class="hero-cta">
+        <span>Discover Innovation</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M7 1v12M1 7l6 6 6-6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Stats — bottom-right -->
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="hs-n">35+</span><span class="hs-l">Years</span></div>
+      <div class="hero-stat"><span class="hs-n">90+</span><span class="hs-l">Countries</span></div>
+      <div class="hero-stat"><span class="hs-n">50K+</span><span class="hs-l">Projects</span></div>
+    </div>
+
+    <!-- Slide counter + dots -->
+    <div class="hs-ui">
+      <div class="hs-counter">
+        <span class="hs-cur" id="hs-cur">01</span>
+        <span class="hs-sep">&thinsp;/&thinsp;</span>
+        <span class="hs-tot">10</span>
+      </div>
+      <div class="hs-dots" id="hs-dots"></div>
+    </div>
+
+  </section>
+
+  <!-- ===== DISSECTION SCROLL ZONE (500vh) ===== -->
+  <div class="dissection-wrap" id="dissection-wrap">
+
+
+  </div>
+
+  <!-- ===== FIRE RATING ===== -->
+  <section class="fire-section" id="fire-rating">
+    <div class="fire-inner">
+      <div class="fire-text-col">
+        <!-- Video fills the card as background -->
+        <video class="fire-vid-bg" src="alubond%20fr.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        <!-- Gradient for readability -->
+        <div class="fire-vid-overlay"></div>
+        <!-- Text overlay -->
+        <div class="fire-vid-text">
+          <span class="section-label">002 / Safety &amp; Compliance</span>
+          <h2 class="fire-heading">Built to the World's<br>Strictest Standards</h2>
+          <p class="fire-sub">From European classifications to American NFPA codes, every Alubond panel is independently tested and globally certified for fire performance.</p>
+          <a href="#" class="text-link">
+            View all certifications
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="fire-badges-col">
+        <div class="fire-badge-grid">
+          <div class="fire-badge">
+            <span class="badge-code">EN 13501</span>
+            <span class="badge-desc">European Fire Classification</span>
+            <span class="badge-sub">Class A2&#8209;s1,d0</span>
+          </div>
+          <div class="fire-badge">
+            <span class="badge-code">NFPA 285</span>
+            <span class="badge-desc">Fire Propagation</span>
+            <span class="badge-sub">Fully Compliant</span>
+          </div>
+          <div class="fire-badge">
+            <span class="badge-code">BS 8414</span>
+            <span class="badge-desc">British Standard</span>
+            <span class="badge-sub">BRE Certified</span>
+          </div>
+          <div class="fire-badge">
+            <span class="badge-code">UL FR</span>
+            <span class="badge-desc">Underwriters Laboratory</span>
+            <span class="badge-sub">Listed Product</span>
+          </div>
+          <div class="fire-badge">
+            <span class="badge-code">ASTM E&#8209;84</span>
+            <span class="badge-desc">Smoke &amp; Flame Spread</span>
+            <span class="badge-sub">Class A Rating</span>
+          </div>
+          <div class="fire-badge">
+            <span class="badge-code">ISO 9001</span>
+            <span class="badge-desc">Quality Management</span>
+            <span class="badge-sub">Certified Facility</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== COLOR & FINISHES ===== -->
+  <section class="finishes-section" id="finishes">
+
+    <!-- Video zone: dark, full-bleed, switchable -->
+    <div class="finishes-video-zone" id="finishes-video-zone">
+      <video class="finish-vid active" id="vid-wood"
+             autoplay muted loop playsinline preload="auto">
+        <source src="alubondcolor%20chart%20wood.mp4" type="video/mp4">
+      </video>
+      <div class="finishes-vid-overlay">
+        <div class="finishes-vid-text">
+          <span class="finishes-vid-eyebrow">003 / Color &amp; Finishes</span>
+          <h2 class="finishes-vid-heading">A Palette<br>Without Limits</h2>
+        </div>
+        <div class="finishes-vid-tabs">
+          <button class="fvtab active" data-vid="vid-wood" data-cat="wooden">Wooden Series</button>
+          <button class="fvtab"        data-vid="none" data-cat="solid">Solid &amp; Metallic</button>
+          <button class="fvtab"        data-vid="vid-wood" data-cat="stone">Stone Series</button>
+          <button class="fvtab"        data-vid="vid-wood" data-cat="patina">Patina Series</button>
+          <button class="fvtab"        data-vid="vid-wood" data-cat="concrete">Concrete Series</button>
+          <button class="fvtab"        data-vid="vid-wood" data-cat="sand">Sand &amp; Texture</button>
+          <button class="fvtab"        data-vid="vid-wood" data-cat="brushed">Brushed &amp; Anodised</button>
+          <button class="fvtab"        data-vid="vid-wood" data-cat="prismatic">Prismatic Series</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Swatches zone: white bg -->
+    <div class="finishes-swatches-zone">
+      <p class="finishes-swatches-intro" id="finishes-cat-desc">
+        Timeless solids and premium metallics — perfect for modern facades and corporate interiors.
+      </p>
+      <div class="swatches-wrap" id="swatches-wrap">
+
+        <!-- Solid & Metallic -->
+        <div class="swatch-group" data-category="solid">
+          <div class="swatch" style="--c:#EBEBEB" data-name="Glacier White"></div>
+          <div class="swatch" style="--c:#1C1C1E" data-name="Carbon Black"></div>
+          <div class="swatch" style="--c:#C4C4C4" data-name="Bright Silver"></div>
+          <div class="swatch" style="--c:#C2A882" data-name="Champagne"></div>
+          <div class="swatch" style="--c:#B8721A" data-name="Copper Metallic"></div>
+          <div class="swatch" style="--c:#D4AF37" data-name="Gold Metallic"></div>
+          <div class="swatch" style="--c:#1B3A6E" data-name="Royal Blue"></div>
+          <div class="swatch" style="--c:#8B1A1A" data-name="Deep Red"></div>
+          <div class="swatch" style="--c:#2D5A27" data-name="Forest Green"></div>
+          <div class="swatch" style="--c:#4C4C4C" data-name="Graphite"></div>
+        </div>
+
+        <!-- Wooden Series -->
+        <div class="swatch-group active" data-category="wooden" style="display:flex;">
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#A0784A,#C4995A,#7A5830)" data-name="Oak"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#3D2315,#6B3A22,#2A1810)" data-name="Dark Walnut"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#7B5232,#9E6A44,#5C3C22)" data-name="Teak"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#9B4D3E,#C26050,#7A3A2E)" data-name="Cherry"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#C8B560,#E0CC7A,#A89448)" data-name="Bamboo"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#D4A574,#EABB88,#B08858)" data-name="Maple"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#4A3225,#6B4A38,#352418)" data-name="Wenge"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#C8A96E,#E0C080,#A88850)" data-name="Pine"></div>
+        </div>
+
+        <!-- Stone Series -->
+        <div class="swatch-group" data-category="stone">
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#F0EAE0,#D8D0C8,#F8F4EE)" data-name="Marble White"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#808080,#9A9A9A,#686868)" data-name="Granite Grey"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#708090,#889AAA,#586878)" data-name="Slate Blue"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#D4C4A8,#E8D8BC,#C0B090)" data-name="Travertine"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#C8B99A,#DCCAAA,#B0A080)" data-name="Limestone"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#1C1C1C,#383838,#101010)" data-name="Onyx Black"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#C2A87C,#D8C090,#A88E60)" data-name="Sandstone"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#B0A090,#C8B8A8,#988878)" data-name="Quartzite"></div>
+        </div>
+
+        <!-- Patina Series -->
+        <div class="swatch-group" data-category="patina">
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#7C9E7E,#9ABCA0,#607E62)" data-name="Aged Copper"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#4E9090,#6AACAC,#387474)" data-name="Verdigris"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#8C6030,#A87848,#704818)" data-name="Antique Bronze"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#A05030,#C06848,#844018)" data-name="Rust"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#B8A050,#D4BC68,#9C8438)" data-name="Antique Gold"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#5E8860,#7AA07C,#487048)" data-name="Patina Green"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#987060,#B08878,#806050)" data-name="Weathered Copper"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#708888,#8AA4A4,#586E6E)" data-name="Ocean Patina"></div>
+        </div>
+
+        <!-- Concrete Series -->
+        <div class="swatch-group" data-category="concrete">
+          <div class="swatch" style="--c:#D0CCCA" data-name="Light Concrete"></div>
+          <div class="swatch" style="--c:#A8A4A0" data-name="Raw Concrete"></div>
+          <div class="swatch" style="--c:#686462" data-name="Dark Concrete"></div>
+          <div class="swatch" style="--c:#B0ACAA" data-name="Polished Concrete"></div>
+          <div class="swatch" style="--c:#7C7870" data-name="Textured Concrete"></div>
+          <div class="swatch" style="--c:#C4C0BC" data-name="Smooth Concrete"></div>
+          <div class="swatch" style="--c:#E0DCDA" data-name="Pearl Concrete"></div>
+          <div class="swatch" style="--c:#505050" data-name="Graphite Concrete"></div>
+        </div>
+
+        <!-- Sand & Texture -->
+        <div class="swatch-group" data-category="sand">
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#D4B896,#E8CCAA,#C0A47E)" data-name="Desert Sand"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#C8A070,#DEB888,#B08858)" data-name="Sahara"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#E0C898,#F0D8A8,#CCB480)" data-name="Dune"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#C87850,#E09068,#B06038)" data-name="Terracotta"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#B87860,#D09078,#9A6048)" data-name="Clay"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#D8C4A0,#ECD8B4,#C4B088)" data-name="Sandy Beige"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#A89070,#BCAA88,#8E7858)" data-name="Linen Texture"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#E8D4B0,#F8E4C0,#D4C09A)" data-name="Ivory Sand"></div>
+        </div>
+
+        <!-- Brushed & Anodised -->
+        <div class="swatch-group" data-category="brushed">
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#C0C0C0,#D8D8D8,#A8A8A8)" data-name="Brushed Silver"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#C8A850,#E0C068,#B08838)" data-name="Brushed Gold"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#A07840,#B89058,#886028)" data-name="Brushed Bronze"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#2A2A2A,#404040,#181818)" data-name="Anodised Black"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#D4C090,#E8D4A8,#C0AC78)" data-name="Champagne Brushed"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#9090A0,#AAAAB8,#787888)" data-name="Brushed Titanium"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#B09070,#C8A888,#9A7858)" data-name="Brushed Copper"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#485060,#606878,#384048)" data-name="Anodised Gunmetal"></div>
+        </div>
+
+        <!-- Prismatic Series -->
+        <div class="swatch-group" data-category="prismatic">
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#FF6B6B,#FFD93D,#6BCB77)" data-name="Spectrum Red"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#4D96FF,#A855F7,#EC4899)" data-name="Aurora Blue"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#E8E8E8,#C8D0D8,#F0F0F8)" data-name="Pearl White"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#C0A0FF,#FFB0D0,#A0E0FF)" data-name="Holographic"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#FFD700,#FFA500,#FF6347)" data-name="Solar Prism"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#00CED1,#40E0D0,#48D1CC)" data-name="Iridescent Teal"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#B8860B,#DAA520,#CD853F)" data-name="Liquid Bronze"></div>
+          <div class="swatch swatch-grad" style="--c:linear-gradient(135deg,#9400D3,#4B0082,#FF1493)" data-name="Spectrum Violet"></div>
+        </div>
+
+      </div>
+      <div class="swatch-name" id="swatch-name">&nbsp;</div>
+      <div class="finishes-cta-row">
+        <p class="finishes-cta-text">Over 200 colours, wood grains, stone finishes, and metallic effects available.</p>
+        <a href="https://3dfacadealubond.com/" target="_blank" rel="noopener" class="finishes-cta-btn">
+          Explore Color Studio
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== APPLICATIONS ===== -->
+  <section class="applications-section" id="applications">
+    <div class="applications-header">
+      <div class="apps-header-left">
+        <span class="section-label">004 / Applications</span>
+        <h2 class="applications-heading">Where Alubond<br>Performs</h2>
+      </div>
+      <p class="applications-sub">Five industries. One material.<br>Endless architectural possibility.</p>
+    </div>
+    <div class="app-track-outer" id="app-track-outer">
+      <div class="app-track" id="app-track">
+        <div class="app-card">
+          <div class="app-card-img-wrap">
+            <img src="https://placehold.co/540x600/E8E8E8/1D1D1F?text=Facades" alt="Building Facades">
+          </div>
+          <div class="app-card-body">
+            <span class="app-num">01</span>
+            <h3 class="app-title">Building<br>Facades</h3>
+            <p class="app-desc">Curtain walls, rainscreen cladding, and architectural envelope systems for commercial high-rises.</p>
+          </div>
+        </div>
+        <div class="app-card app-card--video">
+          <div class="app-card-img-wrap">
+            <video
+              class="app-card-video"
+              src="alubond%20trailer%20video.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            ></video>
+            <div class="app-card-video-badge">
+              <svg width="9" height="9" viewBox="0 0 9 9" fill="none" aria-hidden="true">
+                <polygon points="2,1.5 8,4.5 2,7.5" fill="#fff"/>
+              </svg>
+              <span>Playing</span>
+            </div>
+          </div>
+          <div class="app-card-body">
+            <span class="app-num">02</span>
+            <h3 class="app-title">Automobile<br>Industry</h3>
+            <p class="app-desc">Lightweight composite panels for vehicle bodies, trailers, and custom automotive applications.</p>
+          </div>
+        </div>
+        <div class="app-card app-card--video">
+          <div class="app-card-img-wrap">
+            <video
+              class="app-card-video"
+              src="landrover.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            ></video>
+            <div class="app-card-video-badge">
+              <svg width="9" height="9" viewBox="0 0 9 9" fill="none" aria-hidden="true">
+                <polygon points="2,1.5 8,4.5 2,7.5" fill="#fff"/>
+              </svg>
+              <span>Playing</span>
+            </div>
+          </div>
+          <div class="app-card-body">
+            <span class="app-num">03</span>
+            <h3 class="app-title">Corporate<br>Identity</h3>
+            <p class="app-desc">Branded signage, lobby features, and executive installations with precision color matching.</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <div class="app-card-img-wrap">
+            <img src="https://placehold.co/540x600/E8E8E8/1D1D1F?text=Machines" alt="Machine Covers">
+          </div>
+          <div class="app-card-body">
+            <span class="app-num">04</span>
+            <h3 class="app-title">Machine<br>Covers</h3>
+            <p class="app-desc">Industrial enclosures, equipment housings, and cleanroom panels requiring fire-rated surfaces.</p>
+          </div>
+        </div>
+        <div class="app-card">
+          <div class="app-card-img-wrap">
+            <img src="https://placehold.co/540x600/E8E8E8/1D1D1F?text=Elevators" alt="Elevators">
+          </div>
+          <div class="app-card-body">
+            <span class="app-num">05</span>
+            <h3 class="app-title">Elevators &amp;<br>Interiors</h3>
+            <p class="app-desc">Lift car panels, interior partitions, and decorative wall systems in high-traffic environments.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="app-progress-wrap">
+      <div class="app-progress-bar" id="app-progress-bar"></div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section class="gallery-section" id="gallery">
+    <div class="gallery-inner">
+      <div class="gallery-header">
+        <div class="gallery-header-text">
+          <span class="section-label">005 / Global Projects</span>
+          <h2 class="gallery-heading">Trusted by<br>Architects Worldwide</h2>
+          <p class="gallery-sub">From iconic towers in the Gulf to cultural landmarks across Europe — Alubond panels define skylines on every continent.</p>
+        </div>
+        <a href="https://www.alubond.com/our-projects/" target="_blank" rel="noopener" class="gallery-cta-link">
+          View Project Gallery
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <div class="gallery-grid">
+
+        <!-- Tall hero item -->
+        <div class="g-item g-tall">
+          <img src="hero%20slider/the-address-hotel-13.jpg.webp" alt="The Address Downtown, Dubai">
+          <div class="g-flag">UAE</div>
+          <div class="g-info">
+            <span class="g-title">The Address Downtown</span>
+            <span class="g-loc">Dubai, United Arab Emirates</span>
+          </div>
+        </div>
+
+        <!-- Top-right -->
+        <div class="g-item">
+          <img src="hero%20slider/Tornado-Tower-scaled.webp" alt="Tornado Tower, Doha">
+          <div class="g-flag">Qatar</div>
+          <div class="g-info">
+            <span class="g-title">Tornado Tower</span>
+            <span class="g-loc">Doha, Qatar</span>
+          </div>
+        </div>
+
+        <!-- Mid-right -->
+        <div class="g-item">
+          <img src="hero%20slider/Khalifa%20stadium.jpg" alt="Khalifa Stadium, Doha">
+          <div class="g-flag">Qatar</div>
+          <div class="g-info">
+            <span class="g-title">Khalifa Stadium</span>
+            <span class="g-loc">Doha, Qatar</span>
+          </div>
+        </div>
+
+        <!-- Wide bottom -->
+        <div class="g-item g-wide">
+          <img src="hero%20slider/St.%20Petersburg%20Stadium%2C%20Russia.jpg" alt="Krestovsky Stadium, St. Petersburg">
+          <div class="g-flag">Russia</div>
+          <div class="g-info">
+            <span class="g-title">Krestovsky Stadium</span>
+            <span class="g-loc">St. Petersburg, Russia</span>
+          </div>
+        </div>
+
+      </div><!-- /gallery-grid -->
+
+      <!-- Secondary row -->
+      <div class="gallery-strip">
+        <div class="gs-item">
+          <img src="hero%20slider/Burj-Khalifa.jpg" alt="Burj Khalifa, Dubai">
+          <div class="g-flag">UAE</div>
+          <div class="g-info"><span class="g-title">Burj Khalifa</span><span class="g-loc">Dubai, UAE</span></div>
+        </div>
+        <div class="gs-item">
+          <img src="hero%20slider/Yas%20Marina.jpg" alt="Yas Marina, Abu Dhabi">
+          <div class="g-flag">UAE</div>
+          <div class="g-info"><span class="g-title">Yas Marina</span><span class="g-loc">Abu Dhabi, UAE</span></div>
+        </div>
+        <div class="gs-item">
+          <img src="hero%20slider/Abu%20Dhabi%20Airport.jpg" alt="Abu Dhabi International Airport">
+          <div class="g-flag">UAE</div>
+          <div class="g-info"><span class="g-title">Abu Dhabi Airport</span><span class="g-loc">Abu Dhabi, UAE</span></div>
+        </div>
+        <div class="gs-item">
+          <img src="hero%20slider/RedSeaAirport_Credit_Foster%2BPartners_005.webp" alt="Red Sea International Airport">
+          <div class="g-flag">KSA</div>
+          <div class="g-info"><span class="g-title">Red Sea Airport</span><span class="g-loc">NEOM, Saudi Arabia</span></div>
+        </div>
+        <div class="gs-item">
+          <img src="hero%20slider/NAC%20Municipal%20building_Belgium.jpg" alt="NAC Municipal Building, Belgium">
+          <div class="g-flag">Belgium</div>
+          <div class="g-info"><span class="g-title">NAC Municipal Building</span><span class="g-loc">Belgium</span></div>
+        </div>
+      </div><!-- /gallery-strip -->
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="footer">
+    <div class="footer-cta">
+      <span class="footer-eyebrow">006 / Let's Build</span>
+      <h2 class="footer-heading">Request<br>Technical Specs</h2>
+      <p class="footer-sub">Get datasheets, fire test reports, and sample panels delivered to your specification team.</p>
+      <div class="footer-actions">
+        <a href="#" class="footer-btn primary">Request Technical Specs</a>
+        <a href="#" class="footer-btn secondary">Download Catalogue</a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <img src="brand%20assets/Alubond_Logo.png" alt="Alubond" class="footer-logo">
+      <span class="footer-copy">&copy; 2026 Alubond U.S.A. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Certifications</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CDN SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

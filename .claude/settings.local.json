@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(lsof -ti:3000)",
+      "Bash(node screenshot.mjs http://localhost:3000 hero)"
+    ]
+  }
+}
