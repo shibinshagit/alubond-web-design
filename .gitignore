@@ -1,5 +1,5 @@
 node_modules/
-frames/
+/frames/
 temporary screenshots/
 temporary sceenshots/
 .DS_Store
