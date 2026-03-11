@@ -7,7 +7,7 @@
 const FRAME_COUNT = 241;
 const FRAME_SPEED = 2.5;   // animation completes at p≈0.40 of 160vh ≈ 64vh scroll
 const IMAGE_SCALE = 0.80;
-const FRAME_PATH  = (n) => `assets/frames/frame_${String(n).padStart(4,'0')}.webp`;
+const FRAME_PATH  = (n) => `/assets/frames/frame_${String(n).padStart(4,'0')}.webp`;
 
 /* =================== DOM =================== */
 const canvas          = document.getElementById('canvas');
