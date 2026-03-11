@@ -2,6 +2,16 @@ node_modules/
 frames/
 temporary screenshots/
 temporary sceenshots/
-*.mp4
 .DS_Store
 memory/
+
+# Large asset folders — only assets/ is used for deploy (see scripts/copy-assets.sh)
+HIRES PICTURE/
+frames2/
+hero slider/
+alubond application card/
+brand assets/
+
+# Root-level videos (deploy uses assets/videos/)
+*.mp4
+!assets/videos/*.mp4

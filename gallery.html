@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Alubond U.S.A</title>
+  <meta name="description" content="Explore Alubond façade projects across sectors and geographies worldwide.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --orange:    #F7941D;
+      --orange-dk: #D97D0A;
+      --navy:      #0D1535;
+      --navy-mid:  #1B2B6B;
+      --navy-light:#162042;
+      --white:     #FFFFFF;
+      --off-white: #F5F5F7;
+      --black:     #1D1D1F;
+      --grey:      #6E6E73;
+      --lt-grey:   #D2D2D7;
+      --border-dk: rgba(255,255,255,0.08);
+      --font-d:    'Barlow Condensed', sans-serif;
+      --font-b:    'Inter', sans-serif;
+      --ease:      cubic-bezier(0.22,1,0.36,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: auto; }
+    body {
+      font-family: var(--font-b);
+      background: #ffffff;
+      color: var(--black);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: var(--font-b); cursor: pointer; }
+
+    /* ─── HEADER ─────────────────────────────────────────────────────── */
+    .g-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .g-header-back {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.04em;
+      color: rgba(0,0,0,0.45);
+      transition: color 0.18s ease;
+    }
+    .g-header-back:hover { color: var(--black); }
+    .g-header-back svg { transition: transform 0.2s ease; }
+    .g-header-back:hover svg { transform: translateX(-3px); }
+    .g-header-logo {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      height: 22px; width: auto;
+      filter: none; opacity: 0.85;
+    }
+    .g-header-contact {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--orange); border: 1px solid rgba(247,148,29,0.4);
+      padding: 0.4rem 1rem; border-radius: 980px;
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+    .g-header-contact:hover { background: var(--orange); color: var(--white); border-color: var(--orange); }
+
+    /* ─── PAGE WRAPPER ───────────────────────────────────────────────── */
+    .g-page {
+      padding-top: 60px;
+      min-height: 100vh;
+    }
+
+    /* ─── PAGE HEAD ──────────────────────────────────────────────────── */
+    .g-head {
+      padding: 3.5rem 3rem 0;
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 2rem;
+    }
+    .g-page-title {
+      font-family: var(--font-d);
+      font-size: clamp(2.2rem, 4.5vw, 4.2rem);
+      font-weight: 800; line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--black);
+    }
+    .g-head-meta {
+      text-align: right; flex-shrink: 0;
+    }
+    .g-head-count {
+      font-family: var(--font-d);
+      font-size: 1.8rem; font-weight: 700;
+      color: var(--orange); line-height: 1;
+    }
+    .g-head-count-label {
+      font-size: 0.6rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(0,0,0,0.38); margin-top: 0.2rem;
+    }
+
+    /* ─── FILTER TABS ────────────────────────────────────────────────── */
+    .g-filter-nav {
+      padding: 2rem 3rem 0;
+      display: flex; align-items: center; gap: 0;
+      overflow-x: auto; scrollbar-width: none;
+    }
+    .g-filter-nav::-webkit-scrollbar { display: none; }
+    .g-tab {
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(0,0,0,0.38);
+      background: none; border: none;
+      padding: 0.6rem 0; margin-right: 0;
+      white-space: nowrap;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+    .g-tab::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 1.5px; background: var(--orange);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s var(--ease);
+    }
+    .g-tab:hover { color: rgba(0,0,0,0.7); }
+    .g-tab.active { color: var(--black); }
+    .g-tab.active::after { transform: scaleX(1); }
+    .g-tab-sep {
+      color: rgba(0,0,0,0.18);
+      font-size: 0.7rem;
+      padding: 0 1.25rem;
+      user-select: none;
+    }
+
+    /* ─── DIVIDER LINE ───────────────────────────────────────────────── */
+    .g-divider {
+      margin: 0 3rem;
+      height: 1px;
+      background: rgba(0,0,0,0.1);
+      margin-top: 0.6rem;
+    }
+
+    /* ─── BREADCRUMB (project view) ──────────────────────────────────── */
+    .g-breadcrumb {
+      display: none;
+      align-items: center; gap: 0.6rem;
+      padding: 1.25rem 3rem 0;
+      font-size: 0.7rem; color: rgba(0,0,0,0.4);
+    }
+    .g-breadcrumb.visible { display: flex; }
+    .g-breadcrumb-back {
+      display: flex; align-items: center; gap: 0.35rem;
+      color: var(--orange); background: none; border: none;
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color 0.18s ease;
+    }
+    .g-breadcrumb-back:hover { color: var(--orange-dk); }
+    .g-breadcrumb-sep { opacity: 0.3; }
+    .g-breadcrumb-current { color: rgba(0,0,0,0.7); font-weight: 500; }
+
+    /* ─── GRID CONTAINER ─────────────────────────────────────────────── */
+    .g-grid-wrap {
+      padding: 2rem 3rem 4rem;
+    }
+
+    /* ─── CATEGORY GRID ──────────────────────────────────────────────── */
+    .g-cat-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 3px;
+    }
+
+    .g-cat-tile {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--navy-light);
+    }
+    .g-cat-tile img {
+      width: 100%; height: 100%; object-fit: cover;
+      transform: scale(1.04);
+      transition: transform 0.7s var(--ease);
+    }
+    .g-cat-tile:hover img { transform: scale(1.1); }
+
+    /* Overlay — dark permanent + lighter on hover */
+    .g-cat-tile-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(13,21,53,0.25) 0%,
+        rgba(13,21,53,0.55) 60%,
+        rgba(13,21,53,0.78) 100%
+      );
+      transition: background 0.35s ease;
+    }
+    .g-cat-tile:hover .g-cat-tile-overlay {
+      background: linear-gradient(
+        to bottom,
+        rgba(13,21,53,0.15) 0%,
+        rgba(13,21,53,0.40) 50%,
+        rgba(13,21,53,0.68) 100%
+      );
+    }
+
+    /* Orange accent line — bottom, reveals on hover */
+    .g-cat-tile::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--orange);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.35s var(--ease);
+      z-index: 3;
+    }
+    .g-cat-tile:hover::after { transform: scaleX(1); }
+
+    .g-cat-tile-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1rem 1.1rem 1rem;
+      z-index: 2;
+    }
+    .g-cat-tile-count {
+      font-size: 0.55rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 0.3rem;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .g-cat-tile:hover .g-cat-tile-count { opacity: 1; transform: translateY(0); }
+
+    .g-cat-tile-name {
+      font-family: var(--font-d);
+      font-size: clamp(0.85rem, 1.1vw, 1.05rem);
+      font-weight: 700; line-height: 1.15;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--white);
+    }
+
+    /* ─── PROJECT GRID ───────────────────────────────────────────────── */
+    .g-proj-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+      display: none;
+    }
+    .g-proj-grid.active { display: grid; }
+
+    .g-proj-card {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--navy-light);
+    }
+
+    .g-proj-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      transform: scale(1.04);
+      transition: transform 0.7s var(--ease);
+    }
+    .g-proj-card:hover img { transform: scale(1.1); }
+
+    .g-proj-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 30%, rgba(13,21,53,0.82) 100%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .g-proj-card:hover .g-proj-card-overlay { opacity: 1; }
+
+    .g-proj-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--orange);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.35s var(--ease);
+      z-index: 3;
+    }
+    .g-proj-card:hover::after { transform: scaleX(1); }
+
+    /* Fire rated badge */
+    .g-proj-fire {
+      position: absolute; top: 0.75rem; right: 0.75rem;
+      font-size: 0.55rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      background: rgba(13,21,53,0.75);
+      backdrop-filter: blur(6px);
+      color: var(--orange); padding: 0.25rem 0.55rem;
+      border-radius: 980px; z-index: 2;
+      border: 1px solid rgba(247,148,29,0.35);
+    }
+
+    .g-proj-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 0.875rem 1rem;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.3s ease, transform 0.3s var(--ease);
+    }
+    .g-proj-card:hover .g-proj-label { opacity: 1; transform: translateY(0); }
+
+    .g-proj-label-loc {
+      font-size: 0.6rem; font-weight: 500;
+      letter-spacing: 0.06em; color: rgba(255,255,255,0.6);
+      margin-bottom: 0.2rem;
+    }
+    .g-proj-label-name {
+      font-family: var(--font-d);
+      font-size: 1.05rem; font-weight: 700;
+      letter-spacing: 0.03em; text-transform: uppercase;
+      color: var(--white); line-height: 1.1;
+    }
+
+    /* Static bottom label strip */
+    .g-proj-static {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 0.6rem 1rem;
+      background: linear-gradient(to top, rgba(13,21,53,0.7) 0%, transparent 100%);
+      z-index: 2;
+    }
+    .g-proj-static-name {
+      font-family: var(--font-d);
+      font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: rgba(255,255,255,0.85); line-height: 1.2;
+    }
+
+    /* ─── LIGHTBOX ───────────────────────────────────────────────────── */
+    .g-lightbox {
+      position: fixed; inset: 0; z-index: 500;
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none; opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .g-lightbox.open { pointer-events: all; opacity: 1; }
+    .g-lb-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(5,9,20,0.93);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+    }
+    .g-lb-panel {
+      position: relative; z-index: 2;
+      width: min(90vw, 1000px);
+      max-height: 88vh;
+      display: grid; grid-template-columns: 1.1fr 1fr;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 60px 120px rgba(0,0,0,0.7);
+      transform: scale(0.96) translateY(20px);
+      transition: transform 0.4s var(--ease);
+    }
+    .g-lightbox.open .g-lb-panel { transform: scale(1) translateY(0); }
+
+    .g-lb-img {
+      position: relative;
+      min-height: 460px; max-height: 88vh;
+      overflow: hidden;
+    }
+    .g-lb-img img { width: 100%; height: 100%; object-fit: cover; }
+    .g-lb-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, transparent 60%, rgba(13,21,53,0.4) 100%);
+    }
+
+    .g-lb-body {
+      background: var(--navy-light);
+      padding: 2.5rem 2rem;
+      display: flex; flex-direction: column; gap: 1.25rem;
+      overflow-y: auto; scrollbar-width: none;
+    }
+    .g-lb-body::-webkit-scrollbar { display: none; }
+
+    .g-lb-close {
+      position: absolute; top: 1rem; right: 1rem;
+      width: 34px; height: 34px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.18s ease;
+      z-index: 5;
+    }
+    .g-lb-close:hover { background: rgba(255,255,255,0.2); }
+
+    .g-lb-eyebrow {
+      font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--orange);
+    }
+    .g-lb-title {
+      font-family: var(--font-d);
+      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+      font-weight: 800; line-height: 0.95;
+      letter-spacing: -0.02em; text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .g-lb-meta { display: flex; flex-direction: column; gap: 0; }
+    .g-lb-row {
+      display: flex; gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border-dk);
+      font-size: 0.75rem;
+    }
+    .g-lb-row:last-child { border-bottom: none; }
+    .g-lb-key {
+      font-weight: 600; color: rgba(255,255,255,0.35);
+      min-width: 90px; flex-shrink: 0;
+    }
+    .g-lb-val { color: rgba(255,255,255,0.8); }
+    .g-lb-val.fr { color: var(--orange); font-weight: 500; }
+
+    .g-lb-desc {
+      font-size: 0.8rem; line-height: 1.75;
+      color: rgba(255,255,255,0.45);
+      flex: 1;
+    }
+    .g-lb-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .g-lb-tag {
+      font-size: 0.6rem; font-weight: 500;
+      padding: 0.25rem 0.65rem;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 980px; color: rgba(255,255,255,0.45);
+    }
+    .g-lb-actions { display: flex; gap: 0.75rem; padding-top: 0.5rem; }
+    .g-lb-btn {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 0.7rem 1.5rem; border-radius: 980px;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .g-lb-btn.primary { background: var(--orange); color: var(--white); border: 1.5px solid var(--orange); }
+    .g-lb-btn.primary:hover { background: var(--orange-dk); border-color: var(--orange-dk); }
+    .g-lb-btn.ghost {
+      background: transparent; color: rgba(0,0,0,0.55);
+      border: 1.5px solid rgba(0,0,0,0.18);
+    }
+    .g-lb-btn.ghost:hover { border-color: rgba(0,0,0,0.4); color: var(--black); }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────────── */
+    .g-foot {
+      border-top: 1px solid rgba(0,0,0,0.1);
+      padding: 1.5rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .g-foot-logo { height: 18px; width: auto; filter: none; opacity: 0.4; }
+    .g-foot-copy { font-size: 0.68rem; color: rgba(0,0,0,0.3); }
+    .g-foot-link {
+      font-size: 0.68rem; color: rgba(0,0,0,0.4);
+      display: flex; align-items: center; gap: 0.35rem;
+      transition: color 0.18s ease;
+    }
+    .g-foot-link:hover { color: rgba(0,0,0,0.75); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────────────── */
+    @media (max-width: 1200px) {
+      .g-cat-grid { grid-template-columns: repeat(4, 1fr); }
+      .g-proj-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .g-head, .g-filter-nav, .g-grid-wrap, .g-divider, .g-breadcrumb, .g-foot { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .g-cat-grid { grid-template-columns: repeat(3, 1fr); }
+      .g-proj-grid { grid-template-columns: repeat(2, 1fr); }
+      .g-lb-panel { grid-template-columns: 1fr; width: 92vw; }
+      .g-lb-img { min-height: 280px; max-height: 320px; }
+    }
+    @media (max-width: 600px) {
+      .g-cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .g-proj-grid { grid-template-columns: repeat(2, 1fr); }
+      .g-page-title { font-size: 3rem; }
+      .g-header { padding: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="g-header">
+    <a href="index.html" class="g-header-back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Back
+    </a>
+    <img src="assets/brand/Alubond_Logo.png" alt="Alubond U.S.A" class="g-header-logo">
+    <a href="index.html#footer" class="g-header-contact">Contact</a>
+  </header>
+
+  <div class="g-page">
+
+    <!-- PAGE HEAD -->
+    <div class="g-head">
+      <h1 class="g-page-title">The Art of<br>Exterior Expression</h1>
+      <div class="g-head-meta">
+        <div class="g-head-count" id="display-count">—</div>
+        <div class="g-head-count-label" id="display-label">Building Types</div>
+      </div>
+    </div>
+
+    <!-- FILTER TABS -->
+    <nav class="g-filter-nav" id="filter-nav">
+      <button class="g-tab active" data-view="type">Building Type</button>
+      <span class="g-tab-sep">|</span>
+      <button class="g-tab" data-view="region">Region</button>
+      <span class="g-tab-sep">|</span>
+      <button class="g-tab" data-view="finish">Colour Surface</button>
+      <span class="g-tab-sep">|</span>
+      <button class="g-tab" data-view="featured">Featured</button>
+    </nav>
+
+    <!-- DIVIDER -->
+    <div class="g-divider"></div>
+
+    <!-- BREADCRUMB (shown in project view) -->
+    <div class="g-breadcrumb" id="breadcrumb">
+      <button class="g-breadcrumb-back" id="breadcrumb-back">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M8 10L4 6L8 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        All Categories
+      </button>
+      <span class="g-breadcrumb-sep">/</span>
+      <span class="g-breadcrumb-current" id="breadcrumb-cat"></span>
+    </div>
+
+    <!-- GRID WRAPPER -->
+    <div class="g-grid-wrap">
+
+      <!-- CATEGORY GRID -->
+      <div class="g-cat-grid" id="cat-grid">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- PROJECT GRID -->
+      <div class="g-proj-grid" id="proj-grid">
+        <!-- Populated by JS -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="g-foot">
+    <img src="assets/brand/Alubond_Logo.png" alt="Alubond" class="g-foot-logo">
+    <span class="g-foot-copy">&copy; 2026 Alubond U.S.A. All rights reserved.</span>
+    <a href="index.html" class="g-foot-link">
+      Return to site
+      <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M1.5 6h9M6 1.5l4.5 4.5L6 10.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="g-lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <div class="g-lb-backdrop" id="lb-backdrop"></div>
+    <div class="g-lb-panel">
+      <div class="g-lb-img">
+        <img src="" alt="" id="lb-img">
+        <div class="g-lb-img-overlay"></div>
+      </div>
+      <div class="g-lb-body">
+        <div>
+          <div class="g-lb-eyebrow" id="lb-type"></div>
+          <h2 class="g-lb-title" id="lb-title"></h2>
+        </div>
+        <div class="g-lb-meta" id="lb-meta"></div>
+        <p class="g-lb-desc" id="lb-desc"></p>
+        <div class="g-lb-tags" id="lb-tags"></div>
+        <div class="g-lb-actions">
+          <a href="index.html#footer" class="g-lb-btn primary">Request Specs
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M1.5 6h9M6 1.5l4.5 4.5L6 10.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <button class="g-lb-btn ghost" id="lb-close-btn">Close</button>
+        </div>
+      </div>
+      <button class="g-lb-close" id="lb-close" aria-label="Close">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+          <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <script>
+  // ─── DATA ────────────────────────────────────────────────────────────────────
+
+  const BUILDING_TYPES = [
+    {
+      id: 'corporate',
+      name: 'Corporate HQ & Offices',
+      img: 'assets/gallery/hi%20res%20images/Tiara%20Tower_6.jpg',
+      count: 5,
+      filter: p => p.type === 'Corporate'
+    },
+    {
+      id: 'hospitality',
+      name: 'Hotels & Hospitality',
+      img: 'assets/gallery/JW-MARRIOTT-303.jpg',
+      count: 8,
+      filter: p => p.type === 'Hospitality'
+    },
+    {
+      id: 'cultural',
+      name: 'Cultural & Civic',
+      img: 'assets/gallery/Belgium/NAC_Municipal%20_building_Houthalen-Helchteren_Belgiu.jpg',
+      count: 3,
+      filter: p => p.type === 'Cultural' || p.type === 'Public'
+    },
+    {
+      id: 'healthcare',
+      name: 'Healthcare',
+      img: 'assets/gallery/hi%20res%20images/Poliklinika%20027_28_29_30_tonemapped.jpg',
+      count: 2,
+      filter: p => p.type === 'Healthcare'
+    },
+    {
+      id: 'retail',
+      name: 'Retail & Commercial',
+      img: 'assets/gallery/Croatia/KING%20%20CROSS_Commercial_Building_Zagreb_Croatia.jpg',
+      count: 7,
+      filter: p => p.type === 'Commercial'
+    },
+    {
+      id: 'education',
+      name: 'Education & Research',
+      img: 'assets/gallery/Turkey/ITU%20%20TEKNOKENT_Educational_Building_Istanbul_Turkey2.jpg',
+      count: 3,
+      filter: p => p.type === 'Education'
+    },
+    {
+      id: 'transport',
+      name: 'Transport & Airports',
+      img: 'assets/gallery/Netherlands/Eindhoven%20Airport%2001.JPG',
+      count: 2,
+      filter: p => p.type === 'Transport'
+    },
+    {
+      id: 'residential',
+      name: 'Residential',
+      img: 'assets/gallery/hi%20res%20images/elite-10-dubai-sports-city-02.jpg',
+      count: 3,
+      filter: p => p.type === 'Residential'
+    },
+    {
+      id: 'leisure',
+      name: 'Leisure & Entertainment',
+      img: 'assets/gallery/hi%20res%20images/Ferrari_World_Abu_Dhabi.jpg',
+      count: 4,
+      filter: p => p.type === 'Public' || p.id === 5 || p.id === 6
+    },
+    {
+      id: 'industrial',
+      name: 'Industrial & Automotive',
+      img: 'assets/gallery/Italy/sipam%20autotorino_01%20s.jpg',
+      count: 3,
+      filter: p => p.type === 'Industrial'
+    }
+  ];
+
+  const REGIONS = [
+    {
+      id: 'uae',
+      name: 'UAE',
+      img: 'assets/gallery/UAE/Button_Yas_Marina.jpg',
+      count: 8,
+      filter: p => p.region === 'UAE'
+    },
+    {
+      id: 'gcc',
+      name: 'GCC',
+      img: 'assets/gallery/Qatar/qipco%20tower%20qatar%2001%20s.jpg',
+      count: 4,
+      filter: p => p.region === 'GCC'
+    },
+    {
+      id: 'europe',
+      name: 'Europe',
+      img: 'assets/gallery/hotel%20W%20barcelona%2021.jpg',
+      count: 17,
+      filter: p => p.region === 'Europe'
+    },
+    {
+      id: 'asia',
+      name: 'Asia',
+      img: 'assets/gallery/MD_entertainment_head_quarter_Commercial_Building_Jakarta_Indonesia.jpg',
+      count: 3,
+      filter: p => p.region === 'Asia'
+    },
+    {
+      id: 'namerica',
+      name: 'North America',
+      img: 'assets/gallery/Belvedere%20BC%2C%20Canada.jpeg',
+      count: 1,
+      filter: p => p.region === 'North America'
+    }
+  ];
+
+  const FINISHES = [
+    {
+      id: 'solid',
+      name: 'Solid & Painted',
+      img: 'assets/gallery/Belgium/NAC_Municipal%20_building_Houthalen-Helchteren_Belgiu.jpg',
+      count: 12,
+      filter: p => p.finish === 'Solid'
+    },
+    {
+      id: 'metallic',
+      name: 'Metallic Series',
+      img: 'assets/gallery/hi%20res%20images/Tiara%20Tower_6.jpg',
+      count: 7,
+      filter: p => p.finish === 'Metallic'
+    },
+    {
+      id: 'stone',
+      name: 'Stone Series',
+      img: 'assets/gallery/Italy/Franchi%20Marmi_Office_Building_Carrara%2C%20Italy.JPG',
+      count: 3,
+      filter: p => p.finish === 'Stone Series'
+    },
+    {
+      id: 'custom',
+      name: 'Custom PVDF',
+      img: 'assets/gallery/hi%20res%20images/Ferrari_World_Abu_Dhabi.jpg',
+      count: 8,
+      filter: p => p.finish === 'Custom PVDF' || p.finish === 'Custom Finish'
+    }
+  ];
+
+  const PROJECTS = [
+    { id:1,  name:"JW Marriott Marina",         location:"Dubai, UAE",              region:"UAE",          type:"Hospitality",  finish:"Custom PVDF",   fireRated:true,  featured:true,  img:"assets/gallery/JW-MARRIOTT-303.jpg",                                                                        desc:"A landmark hospitality tower on Dubai Marina clad in precision-engineered Alubond panels delivering fire-rated performance and visual impact across the full facade envelope.",    tags:["Fire Rated","High-Rise","PVDF Coating"]},
+    { id:2,  name:"Hotel W Barcelona",           location:"Barcelona, Spain",        region:"Europe",       type:"Hospitality",  finish:"Custom Finish",  fireRated:true,  featured:true,  img:"assets/gallery/hotel%20W%20barcelona%2021.jpg",                                                             desc:"The iconic sail-shaped Hotel W on the Barcelona waterfront — one of Alubond's most architecturally complex curved facade systems delivered to the global hospitality market.",      tags:["Fire Rated","Curved Facade","Coastal","Iconic"]},
+    { id:3,  name:"QIPCO Tower",                 location:"Doha, Qatar",             region:"GCC",          type:"Corporate",    finish:"Metallic",       fireRated:true,  featured:true,  img:"assets/gallery/Qatar/qipco%20tower%20qatar%2001%20s.jpg",                                                    desc:"A prestige corporate tower in Doha's financial district featuring Alubond metallic panels delivering a reflective, premium facade aligned with the project's architectural language.", tags:["Fire Rated","Metallic","High-Rise"]},
+    { id:4,  name:"NAC Municipal Building",      location:"Houthalen-Helchteren, BE", region:"Europe",      type:"Public",       finish:"Solid",          fireRated:true,  featured:true,  img:"assets/gallery/Belgium/NAC_Municipal%20_building_Houthalen-Helchteren_Belgiu.jpg",                          desc:"A civic landmark in Belgium where fire compliance, durability, and design integrity are equally non-negotiable — demonstrating Alubond's European public sector capability.",        tags:["Fire Rated","Public Sector","Civic","Belgium"]},
+    { id:5,  name:"Yas Marina Circuit",          location:"Abu Dhabi, UAE",          region:"UAE",          type:"Public",       finish:"Custom Finish",  fireRated:false, featured:true,  img:"assets/gallery/UAE/Button_Yas_Marina.jpg",                                                                  desc:"Alubond panels form part of the spectacular facade envelope of the Yas Marina Circuit, one of Formula 1's most architecturally distinctive venues.",                               tags:["Iconic Venue","UAE","Sports Infrastructure"]},
+    { id:6,  name:"Ferrari World Abu Dhabi",     location:"Abu Dhabi, UAE",          region:"UAE",          type:"Public",       finish:"Custom Finish",  fireRated:true,  featured:true,  img:"assets/gallery/hi%20res%20images/Ferrari_World_Abu_Dhabi.jpg",                                               desc:"The world's largest indoor theme park — a vast red canopy where Alubond panels deliver the visual and structural performance demanded by this globally iconic project.",             tags:["Fire Rated","Landmark","Custom Red PVDF","UAE"]},
+    { id:7,  name:"Eindhoven Airport",           location:"Eindhoven, Netherlands",  region:"Europe",       type:"Transport",    finish:"Solid",          fireRated:true,  featured:false, img:"assets/gallery/Netherlands/Eindhoven%20Airport%2001.JPG",                                                    desc:"Terminal expansion featuring Alubond fire-rated panels meeting European aviation compliance standards while maintaining a clean, modern architectural expression.",                  tags:["Fire Rated","Aviation","Transport"]},
+    { id:8,  name:"Tiara Tower",                 location:"Dubai, UAE",              region:"UAE",          type:"Residential",  finish:"Metallic",       fireRated:true,  featured:false, img:"assets/gallery/hi%20res%20images/Tiara%20Tower_6.jpg",                                                       desc:"A residential high-rise on Sheikh Zayed Road clad with Alubond metallic panels delivering aesthetic sophistication and fire-rated facade performance for the luxury market.",       tags:["Fire Rated","Residential","Metallic","High-Rise"]},
+    { id:9,  name:"Aloft City Centre Deira",     location:"Dubai, UAE",              region:"UAE",          type:"Hospitality",  finish:"Custom Finish",  fireRated:true,  featured:false, img:"assets/gallery/hi%20res%20images/AloftCityCentre-Deira_5.jpg",                                               desc:"A contemporary hotel facade combining bold graphic color treatment with the fire-rated performance required for Dubai's hospitality sector.",                                         tags:["Fire Rated","Hotel","Contemporary","Color PVDF"]},
+    { id:10, name:"Elite Residences",            location:"Dubai Sports City, UAE",  region:"UAE",          type:"Residential",  finish:"Solid",          fireRated:true,  featured:false, img:"assets/gallery/hi%20res%20images/elite-10-dubai-sports-city-02.jpg",                                         desc:"A residential development where Alubond-clad facades deliver a clean, crisp exterior with long-term durability and full fire rating compliance.",                                   tags:["Fire Rated","Residential","UAE"]},
+    { id:11, name:"Hotel Holiday Inn Abu Dhabi", location:"Abu Dhabi, UAE",          region:"UAE",          type:"Hospitality",  finish:"Solid",          fireRated:true,  featured:false, img:"assets/gallery/UAE/Hotel%20Holiday%20Inn%2C%20Abu%20Dhabi.jpg",                                              desc:"Holiday Inn Abu Dhabi's facade system supports the brand's global safety and design consistency requirements with Alubond fire-rated panels.",                                       tags:["Fire Rated","Hotel","Abu Dhabi"]},
+    { id:12, name:"Zira Hotel Belgrade",         location:"Belgrade, Serbia",        region:"Europe",       type:"Hospitality",  finish:"Custom Finish",  fireRated:false, featured:false, img:"assets/gallery/Serbia/Zira%20_Hotel_Belgrade_Serbia.JPG",                                                    desc:"Zira Hotel in Belgrade's city centre — a premium hotel facade that anchors the building's contemporary identity in Serbia's capital.",                                              tags:["Hospitality","Belgrade","Contemporary"]},
+    { id:13, name:"IN Hotel Belgrade",           location:"Belgrade, Serbia",        region:"Europe",       type:"Hospitality",  finish:"Metallic",       fireRated:false, featured:false, img:"assets/gallery/Serbia/IN%20Hotel_Belgrade%2C%20Serbia.JPG",                                                  desc:"A contemporary Belgrade hotel featuring Alubond metallic-series panels delivering a dynamic, light-reflective facade suited to its urban commercial context.",                      tags:["Hotel","Metallic Finish","Serbia"]},
+    { id:14, name:"Porsche Building Belgrade",   location:"Belgrade, Serbia",        region:"Europe",       type:"Commercial",   finish:"Solid",          fireRated:false, featured:false, img:"assets/gallery/Serbia/25%20Porsche%20Building%2C%20Belgrade%20Architect%20Goran%20Vojvodi%C4%87%20300dpi.jpg", desc:"Architect Goran Vojvodic's commercial facade where Alubond panels complement the building's precision-engineering brand identity in Belgrade.",                                  tags:["Commercial","Architectural","Brand Identity"]},
+    { id:15, name:"Hotel Well Terme Tuhelj",     location:"Tuhelj, Croatia",         region:"Europe",       type:"Hospitality",  finish:"Custom Finish",  fireRated:false, featured:false, img:"assets/gallery/Croatia/HotelWell_Terme_Tuhelj_Croatia.jpg",                                                  desc:"A wellness and spa resort where Alubond panels provide a clean, organic material language consistent with the project's health and wellbeing positioning.",                         tags:["Hospitality","Wellness Resort","Croatia"]},
+    { id:16, name:"King Cross Zagreb",           location:"Zagreb, Croatia",         region:"Europe",       type:"Commercial",   finish:"Metallic",       fireRated:false, featured:false, img:"assets/gallery/Croatia/KING%20%20CROSS_Commercial_Building_Zagreb_Croatia.jpg",                               desc:"Large-format retail and commercial development delivering visual consistency and material quality at significant scale in Croatia's capital.",                                        tags:["Commercial","Retail","Large Format"]},
+    { id:17, name:"BAUHAUS Istanbul",            location:"Istanbul, Turkey",        region:"Europe",       type:"Commercial",   finish:"Solid",          fireRated:false, featured:false, img:"assets/gallery/Turkey/BAUHAUS_Commercial_Building_Istanbul_Turkey.jpg",                                       desc:"BAUHAUS Istanbul's large retail facility uses Alubond panels for durable, weather-resistant facade performance in Istanbul's demanding climate.",                                   tags:["Commercial","Retail","Large Format","Turkey"]},
+    { id:18, name:"ITU TEKNOKENT",               location:"Istanbul, Turkey",        region:"Europe",       type:"Education",    finish:"Solid",          fireRated:false, featured:false, img:"assets/gallery/Turkey/ITU%20%20TEKNOKENT_Educational_Building_Istanbul_Turkey2.jpg",                          desc:"Istanbul Technical University's TEKNOKENT innovation campus — a world-class research environment with a contemporary, precision-engineered building envelope.",                    tags:["Education","Technology Campus","Turkey"]},
+    { id:19, name:"BEA Cultural Centre",         location:"Olomouc, Czech Republic", region:"Europe",       type:"Cultural",     finish:"Custom Finish",  fireRated:true,  featured:false, img:"assets/gallery/Italy/BEA%20center%20Olomouc%20and%20Politecnico%20Italy%20CS4.jpg",                          desc:"A cultural and events facility where Alubond panels balance civic presence with material refinement meeting Czech Republic building regulation requirements.",                       tags:["Cultural","Events","Fire Rated","Czech Republic"]},
+    { id:20, name:"Franchi Marmi Offices",       location:"Carrara, Italy",          region:"Europe",       type:"Corporate",    finish:"Stone Series",   fireRated:false, featured:false, img:"assets/gallery/Italy/Franchi%20Marmi_Office_Building_Carrara%2C%20Italy.JPG",                                desc:"Stone-series panels complement Carrara's world-famous marble heritage, delivering material-appropriate facade aesthetics with aluminium composite performance.",                    tags:["Corporate","Stone Series","Italy","Marble Region"]},
+    { id:21, name:"MiNEC Office Building",       location:"Vimodrone, Italy",        region:"Europe",       type:"Corporate",    finish:"Solid",          fireRated:false, featured:false, img:"assets/gallery/Italy/MiNEC%20_Office_Building_Vimodrone_Italy%20(1).jpg",                                    desc:"A clean, contemporary corporate envelope in the demanding Italian architectural market delivering high finish quality near Milan.",                                                  tags:["Corporate","Milan Region","Italy"]},
+    { id:22, name:"Sipam Autotorino",            location:"Italy",                   region:"Europe",       type:"Industrial",   finish:"Solid",          fireRated:false, featured:false, img:"assets/gallery/Italy/sipam%20autotorino_01%20s.jpg",                                                         desc:"A precision-detailed automotive commercial facility where Alubond panels reflect the brand identity of the automotive sector with a technically resolved facade system.",          tags:["Industrial","Automotive","Italy"]},
+    { id:23, name:"Ijburg College",              location:"Amsterdam, Netherlands",  region:"Europe",       type:"Education",    finish:"Solid",          fireRated:true,  featured:false, img:"assets/gallery/Netherlands/Ijburg_College_%20Netherland%20(2).jpg",                                          desc:"A bold, colourful educational facility facade meeting Dutch building regulations — demonstrating Alubond's capability in European education sector projects.",                     tags:["Education","Fire Rated","Netherlands"]},
+    { id:24, name:"Kineum Building",             location:"Gothenburg, Sweden",      region:"Europe",       type:"Corporate",    finish:"Metallic",       fireRated:true,  featured:false, img:"assets/gallery/Kineum%20Building_Gothenburg%20Sweden.jpg",                                                   desc:"Metallic-series panels delivering a sophisticated, light-responsive facade system in Scandinavia's premium corporate architecture sector.",                                         tags:["Corporate","Fire Rated","Metallic","Scandinavia"]},
+    { id:25, name:"MD Entertainment HQ",         location:"Jakarta, Indonesia",      region:"Asia",         type:"Commercial",   finish:"Custom Finish",  fireRated:false, featured:false, img:"assets/gallery/MD_entertainment_head_quarter_Commercial_Building_Jakarta_Indonesia.jpg",                      desc:"A distinctive, brand-aligned corporate facade in Indonesia's competitive commercial development market.",                                                                           tags:["Commercial","HQ Building","Indonesia"]},
+    { id:26, name:"Belvedere BC",                location:"British Columbia, Canada",region:"North America", type:"Residential", finish:"Solid",          fireRated:true,  featured:false, img:"assets/gallery/Belvedere%20BC%2C%20Canada.jpeg",                                                             desc:"Fire-rated panels delivering durable, weather-resistant facade performance suited to Canada's challenging climate conditions.",                                                      tags:["Residential","Fire Rated","Canada"]},
+    { id:27, name:"Delta City",                  location:"Eastern Europe",          region:"Europe",       type:"Commercial",   finish:"Metallic",       fireRated:false, featured:false, img:"assets/gallery/Deltacity.JPG",                                                                                desc:"Large-format shopping and commercial complex demonstrating Alubond's cladding capability across major retail destinations in Eastern European markets.",                             tags:["Commercial","Retail","Large Format"]},
+    { id:28, name:"Red Stripe Building",         location:"Belgrade, Serbia",        region:"Europe",       type:"Commercial",   finish:"Custom Finish",  fireRated:false, featured:false, img:"assets/gallery/Serbia/RED_stripe2.jpg",                                                                      desc:"An architecturally distinctive banded facade composition creating immediate visual identity in its Belgrade urban context.",                                                         tags:["Commercial","Custom Design","Visual Identity"]},
+    { id:29, name:"Vietnam Commercial",          location:"Vietnam",                 region:"Asia",         type:"Commercial",   finish:"Solid",          fireRated:false, featured:false, img:"assets/gallery/Vietnam.jpg",                                                                                  desc:"A commercial development representing Alubond's growing presence across Southeast Asia's expanding architectural and construction sector.",                                          tags:["Commercial","Southeast Asia","Vietnam"]},
+    { id:30, name:"Hungary Development",         location:"Hungary",                 region:"Europe",       type:"Commercial",   finish:"Solid",          fireRated:false, featured:false, img:"assets/gallery/Hungary.jpeg",                                                                                 desc:"A commercial building project showcasing Alubond's reach across Central European markets with consistent quality and technical performance.",                                       tags:["Commercial","Central Europe","Hungary"]}
+  ];
+
+  const FEATURED = PROJECTS.filter(p => p.featured);
+
+  // ─── STATE ────────────────────────────────────────────────────────────────────
+  let currentView  = 'type';   // 'type' | 'region' | 'finish' | 'featured'
+  let inCatView    = true;     // true = category grid, false = project grid
+  let currentCat   = null;
+
+  const catGrid  = document.getElementById('cat-grid');
+  const projGrid = document.getElementById('proj-grid');
+  const breadcrumb = document.getElementById('breadcrumb');
+  const breadcrumbCat = document.getElementById('breadcrumb-cat');
+  const displayCount = document.getElementById('display-count');
+  const displayLabel = document.getElementById('display-label');
+
+  // ─── RENDER CATEGORIES ───────────────────────────────────────────────────────
+  function renderCategories(cats) {
+    catGrid.innerHTML = '';
+    projGrid.classList.remove('active');
+    catGrid.style.display = 'grid';
+    breadcrumb.classList.remove('visible');
+    inCatView = true;
+
+    displayCount.textContent = cats.length;
+
+    cats.forEach((cat, i) => {
+      const tile = document.createElement('div');
+      tile.className = 'g-cat-tile';
+      tile.style.transitionDelay = `${i * 0.04}s`;
+      tile.innerHTML = `
+        <img src="${cat.img}" alt="${cat.name}" loading="lazy">
+        <div class="g-cat-tile-overlay"></div>
+        <div class="g-cat-tile-label">
+          <div class="g-cat-tile-count">${cat.count} Projects</div>
+          <div class="g-cat-tile-name">${cat.name}</div>
+        </div>
+      `;
+      tile.addEventListener('click', () => showProjects(cat));
+      catGrid.appendChild(tile);
+    });
+  }
+
+  // ─── SHOW PROJECTS ────────────────────────────────────────────────────────────
+  function showProjects(cat) {
+    currentCat = cat;
+    inCatView = false;
+
+    let filtered;
+    if (cat.id === 'featured_all') {
+      filtered = FEATURED;
+    } else {
+      filtered = PROJECTS.filter(cat.filter);
+      if (filtered.length === 0) filtered = PROJECTS; // fallback
+    }
+
+    catGrid.style.display = 'none';
+    projGrid.innerHTML = '';
+    projGrid.classList.add('active');
+    breadcrumb.classList.add('visible');
+    breadcrumbCat.textContent = cat.name;
+    displayCount.textContent = filtered.length;
+    displayLabel.textContent = 'Projects';
+
+    filtered.forEach((p, i) => {
+      const card = document.createElement('div');
+      card.className = 'g-proj-card';
+      card.innerHTML = `
+        <img src="${p.img}" alt="${p.name}" loading="lazy">
+        <div class="g-proj-card-overlay"></div>
+        ${p.fireRated ? '<span class="g-proj-fire">FR</span>' : ''}
+        <div class="g-proj-static">
+          <div class="g-proj-static-name">${p.name}</div>
+        </div>
+        <div class="g-proj-label">
+          <div class="g-proj-label-loc">${p.location}</div>
+          <div class="g-proj-label-name">${p.name}</div>
+        </div>
+      `;
+      card.addEventListener('click', () => openLightbox(p));
+      projGrid.appendChild(card);
+    });
+  }
+
+  // ─── BACK TO CATEGORIES ───────────────────────────────────────────────────────
+  document.getElementById('breadcrumb-back').addEventListener('click', () => {
+    projGrid.classList.remove('active');
+    projGrid.innerHTML = '';
+    breadcrumb.classList.remove('visible');
+    displayLabel.textContent = currentView === 'region' ? 'Regions' : currentView === 'finish' ? 'Finishes' : 'Building Types';
+    inCatView = true;
+    catGrid.style.display = 'grid';
+    displayCount.textContent = catGrid.children.length;
+  });
+
+  // ─── FILTER TABS ─────────────────────────────────────────────────────────────
+  document.querySelectorAll('.g-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.g-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentView = tab.dataset.view;
+      inCatView = true;
+
+      if (currentView === 'type') {
+        displayLabel.textContent = 'Building Types';
+        renderCategories(BUILDING_TYPES);
+      } else if (currentView === 'region') {
+        displayLabel.textContent = 'Regions';
+        renderCategories(REGIONS);
+      } else if (currentView === 'finish') {
+        displayLabel.textContent = 'Finishes';
+        renderCategories(FINISHES);
+      } else if (currentView === 'featured') {
+        displayLabel.textContent = 'Featured Projects';
+        showProjects({ id:'featured_all', name:'Featured Projects', filter: p => p.featured });
+        breadcrumb.classList.remove('visible');
+      }
+    });
+  });
+
+  // ─── LIGHTBOX ─────────────────────────────────────────────────────────────────
+  function openLightbox(p) {
+    document.getElementById('lb-img').src = p.img;
+    document.getElementById('lb-img').alt = p.name;
+    document.getElementById('lb-type').textContent = `${p.type} · ${p.region}`;
+    document.getElementById('lb-title').textContent = p.name;
+    document.getElementById('lb-desc').textContent = p.desc;
+    document.getElementById('lb-meta').innerHTML = `
+      <div class="g-lb-row"><span class="g-lb-key">Location</span><span class="g-lb-val">${p.location}</span></div>
+      <div class="g-lb-row"><span class="g-lb-key">Sector</span><span class="g-lb-val">${p.type}</span></div>
+      <div class="g-lb-row"><span class="g-lb-key">Region</span><span class="g-lb-val">${p.region}</span></div>
+      <div class="g-lb-row"><span class="g-lb-key">Finish</span><span class="g-lb-val">${p.finish}</span></div>
+      <div class="g-lb-row"><span class="g-lb-key">Fire Rated</span><span class="g-lb-val ${p.fireRated?'fr':''}">${p.fireRated ? 'Yes — FR Certified' : 'Standard Grade'}</span></div>
+    `;
+    document.getElementById('lb-tags').innerHTML = p.tags.map(t => `<span class="g-lb-tag">${t}</span>`).join('');
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lb-close-btn').addEventListener('click', closeLightbox);
+  document.getElementById('lb-backdrop').addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  // ─── INIT ─────────────────────────────────────────────────────────────────────
+  displayLabel.textContent = 'Building Types';
+  displayCount.textContent = BUILDING_TYPES.length;
+  renderCategories(BUILDING_TYPES);
+  </script>
+</body>
+</html>

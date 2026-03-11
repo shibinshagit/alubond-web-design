@@ -1,11 +1,13 @@
 /* =====================================================
    ALUBOND — Main JS
-   Apple-style scroll site: canvas dissection + white sections
+   Apple-style scroll site: canvas frame scrub + white sections
    ===================================================== */
 
 /* =================== CONSTANTS =================== */
 const FRAME_COUNT = 241;
-const FRAME_PATH  = (n) => `frames/frame_${String(n).padStart(4,'0')}.jpg`;
+const FRAME_SPEED = 2.5;   // animation completes at p≈0.40 of 160vh ≈ 64vh scroll
+const IMAGE_SCALE = 0.80;
+const FRAME_PATH  = (n) => `assets/frames/frame_${String(n).padStart(4,'0')}.webp`;
 
 /* =================== DOM =================== */
 const canvas          = document.getElementById('canvas');
@@ -22,7 +24,7 @@ const siteHeader      = document.getElementById('site-header');
 const frames     = new Array(FRAME_COUNT).fill(null);
 let loadedCount  = 0;
 let currentFrame = 0;
-let bgColor      = '#0D1535';
+let bgColor      = '#FFFFFF';
 let rafPending   = false;
 
 /* =================== CANVAS =================== */
@@ -55,7 +57,7 @@ function drawFrame(index) {
   if (!img || !img.complete || !img.naturalWidth) return;
   const cw = window.innerWidth, ch = window.innerHeight;
   const iw = img.naturalWidth,  ih = img.naturalHeight;
-  const scale = Math.max(cw/iw, ch/ih) * 0.85;
+  const scale = Math.max(cw/iw, ch/ih) * IMAGE_SCALE;
   const dw = iw * scale, dh = ih * scale;
   ctx.fillStyle = bgColor;
   ctx.fillRect(0, 0, cw, ch);
@@ -81,7 +83,6 @@ function loadFrame(index) {
       const pct = Math.round((loadedCount / FRAME_COUNT) * 100);
       loaderFill.style.width = pct + '%';
       loaderPct.textContent  = pct + '%';
-      if (index % 30 === 0) sampleBg(img);
       resolve(img);
     };
     img.onerror = () => { loadedCount++; resolve(null); };
@@ -106,7 +107,7 @@ function hideLoader() {
 /* =================== LENIS =================== */
 function initLenis() {
   const lenis = new window.Lenis({
-    duration: 1.25,
+    duration: 0.68,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10*t)),
     smoothWheel: true
   });
@@ -120,22 +121,7 @@ function initHeader() {
   // Hero is full-bleed photo → frosted light header with black text
   siteHeader.classList.add('light-mode');
 
-  // Entering dark canvas dissection → switch to transparent dark header
-  ScrollTrigger.create({
-    trigger: '#dissection-wrap',
-    start: 'top 52px',
-    onEnter:     () => { siteHeader.classList.replace('light-mode', 'dark-mode'); },
-    onLeaveBack: () => { siteHeader.classList.replace('dark-mode', 'light-mode'); },
-  });
-
-  // Re-enter light on white content sections
-  ScrollTrigger.create({
-    trigger: '#fire-rating',
-    start: 'top 52px',
-    end: 'bottom 52px',
-    onEnter:     () => { siteHeader.classList.replace('dark-mode', 'light-mode'); },
-    onLeaveBack: () => { siteHeader.classList.replace('light-mode', 'dark-mode'); },
-  });
+  // Canvas dissection has white bg — keep light-mode (black text) throughout
 
   // Re-enter dark on footer
   ScrollTrigger.create({
@@ -172,7 +158,7 @@ function initHeroSlider() {
 
   if (!slides.length) return;
 
-  const DURATION = 4500; // ms per slide
+  const DURATION = 3000; // ms per slide
   let current    = 0;
   let timer      = null;
   let paused     = false;
@@ -272,36 +258,97 @@ function initHeroSlider() {
 
 /* =================== DISSECTION =================== */
 function initDissection() {
-  // Hero fades & canvas circle-wipes as user scrolls into dissection
+  canvasWrap.style.clipPath = 'none';
+  canvasWrap.style.opacity  = '0';
+
+  const layerLabels     = document.getElementById('layer-labels');
+  const layerEls        = layerLabels ? [...layerLabels.querySelectorAll('.layer-label')] : [];
+  const philSticky      = document.getElementById('phil-sticky');
+
+  // Info boxes — 4 boxes that appear/disappear during dissection
+  const infoBoxEls = [0,1,2,3].map(i => document.getElementById(`dsct-box-${i}`));
+  // [enterStart, enterEnd, exitStart, exitEnd]
+  const infoRanges = [
+    [0.01, 0.06, 0.09, 0.13],
+    [0.12, 0.17, 0.20, 0.24],
+    [0.23, 0.28, 0.31, 0.35],
+    [0.33, 0.38, 0.40, 0.44],
+  ];
+
+  // 160vh wrap · FRAME_SPEED=2.5 → animation completes at p≈0.40 (~64vh)
+  // Labels spread across animation zone; crossfade + philosophy overlap cleanly after
+  const layerThresholds = [0.04, 0.12, 0.20, 0.28, 0.36];
+
+  // Hero → canvas crossfade: snappy half-viewport overlap
   ScrollTrigger.create({
     trigger: dissectionWrap,
     start: 'top bottom',
     end:   'top top',
-    scrub: true,
+    scrub: 0.4,
     onUpdate: (self) => {
-      heroEl.style.opacity = Math.max(0, 1 - self.progress * 6);
-      const r = self.progress * 82;
-      canvasWrap.style.clipPath = `circle(${r}% at 50% 50%)`;
+      const p = self.progress;
+      heroEl.style.opacity     = Math.max(0, 1 - p * 2.5);
+      canvasWrap.style.opacity = Math.min(1, p * 2.5);
     }
   });
 
-  // Main canvas scrub + labels
+  // Main scrub — tight, every scroll px does something meaningful
   ScrollTrigger.create({
     trigger: dissectionWrap,
     start: 'top top',
     end:   'bottom bottom',
-    scrub: true,
+    scrub: 0.45,   // tighter scrub for more responsive feel
     onUpdate: (self) => {
       const p = self.progress;
 
-      // Frame scrub
-      scheduleFrame(Math.min(Math.floor(p * FRAME_COUNT), FRAME_COUNT - 1));
+      // ── Frame scrub (0 → p≈0.357) ────────────────────────────
+      const accelerated = Math.min(p * FRAME_SPEED, 1);
+      scheduleFrame(Math.min(Math.floor(accelerated * FRAME_COUNT), FRAME_COUNT - 1));
 
-      // Fade canvas out at very end of dissection
-      canvasWrap.style.opacity = p > 0.88 ? Math.max(0, 1 - (p - 0.88) / 0.12) : 1;
+      // ── Canvas + labels fade OUT (p 0.42 → 0.54) ─────────────
+      const canvasFade = p < 0.42 ? 1 : Math.max(0, 1 - (p - 0.42) / 0.12);
+      canvasWrap.style.opacity = canvasFade;
+      if (layerLabels) layerLabels.style.opacity = canvasFade;
+
+      // Layer labels: appear during animation, disappear with canvas
+      layerEls.forEach((el, i) => {
+        el.classList.toggle('ll-visible', p >= layerThresholds[i] && canvasFade > 0);
+      });
+
+      // ── Philosophy fades IN (p 0.48 → 0.58) — overlaps canvas fade ──
+      if (philSticky) {
+        const philFade = p < 0.48 ? 0 : Math.min(1, (p - 0.48) / 0.10);
+        philSticky.style.opacity = philFade;
+        philSticky.style.pointerEvents = philFade > 0.1 ? 'auto' : 'none';
+      }
+
+      // ── Info boxes: rise in, hold, exit upward ─────────────────────
+      infoBoxEls.forEach((el, i) => {
+        if (!el) return;
+        const [e0, e1, x0, x1] = infoRanges[i];
+        let opacity, ty;
+        if (p <= e0 || p >= x1) {
+          opacity = 0;
+          ty = p <= e0 ? 70 : -40;
+        } else if (p < e1) {
+          const t = (p - e0) / (e1 - e0);
+          opacity = t;
+          ty = (1 - t) * 70;
+        } else if (p < x0) {
+          opacity = 1;
+          ty = 0;
+        } else {
+          const t = (p - x0) / (x1 - x0);
+          opacity = 1 - t;
+          ty = -t * 40;
+        }
+        el.style.opacity = opacity;
+        el.style.transform = `translateY(${ty}px)`;
+      });
     }
   });
 }
+
 
 /* =================== FIRE RATING SECTION =================== */
 function initFireSection() {
@@ -309,14 +356,14 @@ function initFireSection() {
   const badges = document.querySelectorAll('.fire-badge');
 
   gsap.fromTo(col1,
-    { y: 36, opacity: 0 },
-    { y: 0, opacity: 1, stagger: 0.1, duration: 0.9, ease: 'power3.out',
-      scrollTrigger: { trigger: '.fire-section', start: 'top 75%' }
+    { y: 28, opacity: 0 },
+    { y: 0, opacity: 1, stagger: 0.08, duration: 0.75, ease: 'power3.out',
+      scrollTrigger: { trigger: '.fire-section', start: 'top 90%' }
     }
   );
   gsap.to(badges, {
-    y: 0, opacity: 1, stagger: 0.08, duration: 0.65, ease: 'power3.out',
-    scrollTrigger: { trigger: '.fire-badge-grid', start: 'top 80%' }
+    y: 0, opacity: 1, stagger: 0.06, duration: 0.55, ease: 'power3.out',
+    scrollTrigger: { trigger: '.fire-badge-grid', start: 'top 92%' }
   });
 }
 
@@ -350,7 +397,7 @@ function initFinishes() {
   // Reveal on scroll enter
   ScrollTrigger.create({
     trigger: '.finishes-swatches-zone',
-    start: 'top 80%',
+    start: 'top 92%',
     once: true,
     onEnter: () => revealSwatches('wooden')
   });
@@ -393,9 +440,9 @@ function initFinishes() {
   // Animate finishes-vid-text on scroll
   const vidText = document.querySelectorAll('.finishes-vid-eyebrow, .finishes-vid-heading, .finishes-vid-tabs');
   gsap.fromTo(vidText,
-    { y: 30, opacity: 0 },
-    { y: 0, opacity: 1, stagger: 0.1, duration: 0.9, ease: 'power3.out',
-      scrollTrigger: { trigger: '.finishes-video-zone', start: 'top 70%' }
+    { y: 22, opacity: 0 },
+    { y: 0, opacity: 1, stagger: 0.08, duration: 0.7, ease: 'power3.out',
+      scrollTrigger: { trigger: '.finishes-video-zone', start: 'top 88%' }
     }
   );
 }
@@ -408,15 +455,15 @@ function initApplications() {
   const progBar = document.getElementById('app-progress-bar');
 
   gsap.fromTo(header,
-    { y: 28, opacity: 0 },
-    { y: 0, opacity: 1, stagger: 0.1, duration: 0.85, ease: 'power3.out',
-      scrollTrigger: { trigger: '.applications-section', start: 'top 80%' }
+    { y: 22, opacity: 0 },
+    { y: 0, opacity: 1, stagger: 0.08, duration: 0.7, ease: 'power3.out',
+      scrollTrigger: { trigger: '.applications-section', start: 'top 90%' }
     }
   );
 
   gsap.to(cards, {
-    y: 0, opacity: 1, stagger: 0.1, duration: 0.75, ease: 'power3.out',
-    scrollTrigger: { trigger: '.app-track-outer', start: 'top 85%' }
+    y: 0, opacity: 1, stagger: 0.08, duration: 0.65, ease: 'power3.out',
+    scrollTrigger: { trigger: '.app-track-outer', start: 'top 92%' }
   });
 
   // Drag scroll
@@ -446,21 +493,21 @@ function initApplications() {
 function initGallery() {
   gsap.fromTo(
     document.querySelectorAll('.gallery-header-text > *, .gallery-cta-link'),
-    { y: 28, opacity: 0 },
-    { y: 0, opacity: 1, stagger: 0.1, duration: 0.85, ease: 'power3.out',
-      scrollTrigger: { trigger: '.gallery-section', start: 'top 80%' }
+    { y: 22, opacity: 0 },
+    { y: 0, opacity: 1, stagger: 0.08, duration: 0.7, ease: 'power3.out',
+      scrollTrigger: { trigger: '.gallery-section', start: 'top 90%' }
     }
   );
   document.querySelectorAll('.g-item').forEach((item, i) => {
     gsap.to(item, {
-      y: 0, opacity: 1, duration: 0.8, delay: i * 0.08, ease: 'power3.out',
-      scrollTrigger: { trigger: '.gallery-grid', start: 'top 85%' }
+      y: 0, opacity: 1, duration: 0.65, delay: i * 0.06, ease: 'power3.out',
+      scrollTrigger: { trigger: '.gallery-grid', start: 'top 92%' }
     });
   });
   document.querySelectorAll('.gs-item').forEach((item, i) => {
     gsap.to(item, {
-      y: 0, opacity: 1, duration: 0.7, delay: i * 0.07, ease: 'power3.out',
-      scrollTrigger: { trigger: '.gallery-strip', start: 'top 88%' }
+      y: 0, opacity: 1, duration: 0.6, delay: i * 0.05, ease: 'power3.out',
+      scrollTrigger: { trigger: '.gallery-strip', start: 'top 94%' }
     });
   });
 }
@@ -469,9 +516,9 @@ function initGallery() {
 function initFooter() {
   gsap.fromTo(
     document.querySelectorAll('.footer-eyebrow, .footer-heading, .footer-sub, .footer-btn'),
-    { y: 36, opacity: 0 },
-    { y: 0, opacity: 1, stagger: 0.1, duration: 0.9, ease: 'power3.out',
-      scrollTrigger: { trigger: '.footer-cta', start: 'top 80%' }
+    { y: 24, opacity: 0 },
+    { y: 0, opacity: 1, stagger: 0.08, duration: 0.75, ease: 'power3.out',
+      scrollTrigger: { trigger: '.footer-cta', start: 'top 88%' }
     }
   );
 }
